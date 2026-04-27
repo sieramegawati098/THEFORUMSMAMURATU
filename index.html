@@ -12,11 +12,18 @@
         .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
         .admin-only { display: none; }
         body.admin-mode .admin-only { display: block; }
-        body.admin-mode .student-only { display: none; }
         .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
         
-        .comment-card:hover .delete-btn { opacity: 1; }
-        .approval-card { transition: all 0.3s ease; }
+        .brand-gradient { background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%); }
+        .nav-link:after { content: ''; display: block; width: 0; height: 2px; background: #2563eb; transition: width .3s; }
+        .nav-link:hover:after { width: 100%; }
+
+        .icon-box {
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 transition-all duration-300">
@@ -24,27 +31,30 @@
     <!-- Navigation -->
     <nav class="sticky top-0 z-50 glass border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-2">
-                    <div class="bg-blue-600 p-2 rounded-lg text-white">
-                        <i class="fas fa-graduation-cap"></i>
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center gap-3">
+                    <div class="brand-gradient p-2.5 rounded-xl text-white shadow-lg shadow-blue-200">
+                        <i class="fas fa-shield-halved text-xl"></i>
                     </div>
-                    <span class="text-xl font-bold tracking-tight">EduConnect</span>
+                    <div class="flex flex-col">
+                        <span class="text-xl font-bold tracking-tight text-gray-900 leading-none">EduConnect</span>
+                        <span class="text-[10px] font-bold text-blue-600 tracking-[0.2em] uppercase">Student Hub</span>
+                    </div>
                 </div>
                 
                 <div class="hidden md:flex space-x-8">
-                    <a href="#" onclick="showSection('home')" class="nav-link text-gray-600 hover:text-blue-600 font-medium">Beranda</a>
-                    <a href="#" onclick="showSection('majalah')" class="nav-link text-gray-600 hover:text-blue-600 font-medium">E-Majalah</a>
-                    <a href="#" onclick="showSection('forum')" class="nav-link text-gray-600 hover:text-blue-600 font-medium">Forum</a>
-                    <a href="#" onclick="showSection('info')" class="nav-link text-gray-600 hover:text-blue-600 font-medium">Info Terkini</a>
+                    <a href="#" onclick="showSection('home')" class="nav-link text-sm text-gray-600 hover:text-blue-600 font-bold transition">BERANDA</a>
+                    <a href="#" onclick="showSection('majalah')" class="nav-link text-sm text-gray-600 hover:text-blue-600 font-bold transition">E-MAJALAH</a>
+                    <a href="#" onclick="showSection('forum')" class="nav-link text-sm text-gray-600 hover:text-blue-600 font-bold transition">FORUM</a>
+                    <a href="#" onclick="showSection('info')" class="nav-link text-sm text-gray-600 hover:text-blue-600 font-bold transition">INFO TERKINI</a>
                 </div>
 
                 <div class="flex items-center gap-4">
-                    <button id="loginBtn" onclick="toggleLoginModal()" class="bg-blue-600 text-white px-5 py-2 rounded-full font-medium hover:bg-blue-700 transition">
-                        <i class="fas fa-user-shield mr-2"></i>Login Admin
+                    <button id="loginBtn" onclick="toggleLoginModal()" class="text-gray-600 hover:text-blue-600 p-2 transition">
+                        <i class="fas fa-user-shield text-lg"></i>
                     </button>
-                    <button id="logoutBtn" onclick="logout()" class="hidden bg-red-500 text-white px-5 py-2 rounded-full font-medium hover:bg-red-600 transition">
-                        Keluar Admin
+                    <button id="logoutBtn" onclick="logout()" class="hidden bg-red-500 text-white px-5 py-2 rounded-full font-bold text-xs hover:bg-red-600 transition shadow-md">
+                        KELUAR ADMIN
                     </button>
                 </div>
             </div>
@@ -56,394 +66,396 @@
         
         <!-- Section: Home -->
         <section id="home" class="space-y-12">
-            <div class="text-center py-12 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl text-white px-6 shadow-xl">
-                <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Suarakan Aspirasimu, <br>Bangun Sekolahmu.</h1>
-                <p class="text-blue-100 text-lg max-w-2xl mx-auto">Wadah kreatifitas, kritik, saran, dan informasi resmi untuk seluruh siswa.</p>
+            <div class="text-center py-16 bg-gradient-to-br from-blue-700 via-indigo-700 to-violet-800 rounded-[2.5rem] text-white px-6 shadow-2xl relative overflow-hidden">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight">Koneksi Tanpa Batas, <br>Inspirasi Tiap Hari.</h1>
+                <p class="text-blue-100 text-lg max-w-2xl mx-auto font-medium">Platform eksklusif siswa untuk berbagi karya, diskusi sehat, dan update informasi sekolah tercepat.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div onclick="showSection('majalah')" class="cursor-pointer bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
-                    <i class="fas fa-book-open text-3xl text-blue-500 mb-4"></i>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div onclick="showSection('majalah')" class="group cursor-pointer bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div class="icon-box w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl mb-6 group-hover:bg-blue-600 group-hover:text-white">
+                        <i class="fas fa-pen-nib text-2xl"></i>
+                    </div>
                     <h3 class="text-xl font-bold mb-2">E-Majalah</h3>
-                    <p class="text-gray-500">Karya tulis terbaik dari teman-temanmu.</p>
+                    <p class="text-gray-500 text-sm leading-relaxed">Ekspresikan dirimu lewat tulisan, puisi, dan cerpen karya orisinal siswa.</p>
                 </div>
-                <div onclick="showSection('forum')" class="cursor-pointer bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
-                    <i class="fas fa-comments text-3xl text-green-500 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Forum Diskusi</h3>
-                    <p class="text-gray-500">Kritik dan saran sehat untuk sekolah.</p>
+
+                <div onclick="showSection('forum')" class="group cursor-pointer bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div class="icon-box w-14 h-14 bg-indigo-100 text-indigo-600 rounded-2xl mb-6 group-hover:bg-indigo-600 group-hover:text-white">
+                        <i class="fas fa-comments text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">Forum Diskusi</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Sampaikan kritik, saran, dan ide untuk memajukan sekolah kita bersama.</p>
                 </div>
-                <div onclick="showSection('info')" class="cursor-pointer bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
-                    <i class="fas fa-bullhorn text-3xl text-orange-500 mb-4"></i>
+
+                <div onclick="showSection('info')" class="group cursor-pointer bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div class="icon-box w-14 h-14 bg-orange-100 text-orange-600 rounded-2xl mb-6 group-hover:bg-orange-600 group-hover:text-white">
+                        <i class="fas fa-microphone-alt text-2xl"></i>
+                    </div>
                     <h3 class="text-xl font-bold mb-2">Info Terkini</h3>
-                    <p class="text-gray-500">Jadwal event dan pengumuman penting.</p>
+                    <p class="text-gray-500 text-sm leading-relaxed">Jangan sampai ketinggalan jadwal event dan pengumuman mendadak dari OSIS.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Section: Majalah -->
-        <section id="majalah" class="hidden space-y-6">
-            <div class="flex justify-between items-center">
-                <h2 class="text-2xl font-bold text-gray-800">Karya Siswa (E-Majalah)</h2>
-                <button onclick="togglePostModal('majalah')" class="student-only bg-blue-100 text-blue-600 px-4 py-2 rounded-lg font-semibold hover:bg-blue-200 transition">
-                    + Kirim Artikel
-                </button>
-            </div>
-            <div id="majalahList" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
-        </section>
-
-        <!-- Section: Forum -->
-        <section id="forum" class="hidden space-y-6">
-            <div class="flex justify-between items-center">
-                <h2 class="text-2xl font-bold text-gray-800">Forum Kritik & Saran</h2>
-                <button onclick="togglePostModal('forum')" class="student-only bg-green-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-700 transition">
-                    + Buat Diskusi Baru
-                </button>
-            </div>
-            <div id="forumList" class="space-y-4"></div>
-        </section>
-
-        <!-- Section: Info Terkini -->
-        <section id="info" class="hidden space-y-6">
-            <div class="flex justify-between items-center">
-                <h2 class="text-2xl font-bold text-gray-800">Info Terkini & Event</h2>
-                <button onclick="togglePostModal('info')" class="student-only bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-orange-600 transition">
-                    + Bagikan Info
-                </button>
-            </div>
-            <div id="infoList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Info Default -->
-                <div class="bg-orange-50 border border-orange-100 p-6 rounded-2xl post-item" data-comments='[]'>
-                    <div class="flex items-center gap-2 text-orange-600 mb-3">
-                        <i class="fas fa-calendar-alt"></i>
-                        <span class="text-xs font-bold uppercase tracking-widest">Pengumuman Resmi</span>
-                    </div>
-                    <h3 class="text-lg font-bold mb-2 post-title">Ujian Tengah Semester Ganjil</h3>
-                    <p class="text-sm text-gray-600 post-body">Pelaksanaan UTS akan dimulai pada tanggal 15 Oktober 2023. Siapkan diri kalian!</p>
-                    <div class="mt-4 pt-4 border-t border-orange-100 flex justify-between items-center">
-                        <span class="text-[10px] text-orange-400 font-bold post-author">ADMIN SEKOLAH</span>
-                        <button onclick="readDetail(this)" class="text-orange-600 font-bold text-xs">Detail</button>
-                    </div>
+        <!-- Content Sections -->
+        <section id="majalah" class="hidden space-y-8">
+            <div class="bg-white p-8 rounded-3xl border border-gray-100 flex justify-between items-center shadow-sm">
+                <div>
+                    <h2 class="text-2xl font-bold">E-Majalah</h2>
+                    <p class="text-sm text-gray-500">Karya literasi siswa-siswi terbaik</p>
                 </div>
+                <button onclick="togglePostModal('majalah')" class="bg-blue-600 text-white px-6 py-2 rounded-xl font-bold hover:bg-blue-700 transition">Kirim Artikel</button>
             </div>
+            <div id="majalahList" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
         </section>
 
-        <!-- Section: Admin Approval -->
-        <section id="adminDashboard" class="admin-only space-y-6 mt-10">
-            <div class="bg-gray-900 text-white p-6 rounded-2xl shadow-lg">
-                <h2 class="text-xl font-bold flex items-center gap-2">
-                    <i class="fas fa-shield-alt text-red-400"></i>
-                    Panel Kontrol Admin
-                </h2>
-                <p class="text-gray-400 text-sm mt-1">Daftar konten yang menunggu persetujuan Anda.</p>
+        <section id="forum" class="hidden space-y-8">
+            <div class="bg-white p-8 rounded-3xl border border-gray-100 flex justify-between items-center shadow-sm">
+                <div>
+                    <h2 class="text-2xl font-bold">Forum Diskusi</h2>
+                    <p class="text-sm text-gray-500">Diskusi hangat seputar sekolah</p>
+                </div>
+                <button onclick="togglePostModal('forum')" class="bg-indigo-600 text-white px-6 py-2 rounded-xl font-bold hover:bg-indigo-700 transition">Buat Diskusi</button>
             </div>
-            <div id="approvalQueue" class="space-y-4"></div>
+            <div id="forumList" class="space-y-6"></div>
+        </section>
+
+        <section id="info" class="hidden space-y-8">
+            <div class="bg-white p-8 rounded-3xl border border-gray-100 flex justify-between items-center shadow-sm">
+                <div>
+                    <h2 class="text-2xl font-bold">Info Terkini</h2>
+                    <p class="text-sm text-gray-500">Berita dan event terbaru</p>
+                </div>
+                <button onclick="togglePostModal('info')" class="bg-orange-600 text-white px-6 py-2 rounded-xl font-bold hover:bg-orange-700 transition">Bagikan Info</button>
+            </div>
+            <div id="infoList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <!-- Admin Queue -->
+        <section id="adminQueue" class="admin-only space-y-6 mt-12">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold text-red-600"><i class="fas fa-clock mr-2"></i>Antrean Moderasi</h2>
+                <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-xs font-bold">Panel Admin</span>
+            </div>
+            <div id="approvalQueue" class="grid grid-cols-1 gap-4"></div>
         </section>
     </main>
 
-    <!-- Modal: Detail & Komentar -->
+    <!-- Modal: Detail & Comments -->
     <div id="detailModal" class="hidden fixed inset-0 z-[110] flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeDetail()"></div>
-        <div class="relative bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="p-6 border-b border-gray-100 flex justify-between items-start">
-                <div>
-                    <span id="detailCategory" class="text-[10px] font-bold uppercase text-blue-600 bg-blue-50 px-2 py-1 rounded tracking-widest">KONTEN</span>
-                    <h2 id="detailTitle" class="text-2xl font-bold mt-2 text-gray-900 leading-tight">Judul</h2>
-                    <p id="detailAuthor" class="text-sm text-gray-500 mt-1 font-medium">Oleh: Nama Siswa</p>
-                </div>
-                <button onclick="closeDetail()" class="text-gray-400 hover:text-gray-600 p-2">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
+        <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" onclick="closeDetail()"></div>
+        <div class="relative bg-white w-full max-w-2xl rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="p-8 border-b border-gray-100 flex justify-between items-center bg-white sticky top-0">
+                <h2 id="detailTitle" class="text-2xl font-bold text-gray-900 truncate pr-4"></h2>
+                <button onclick="closeDetail()" class="text-gray-400 hover:text-gray-600 w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center transition"><i class="fas fa-times"></i></button>
             </div>
-            <div class="p-6 overflow-y-auto flex-grow bg-gray-50/30">
+            <div class="p-8 overflow-y-auto flex-grow bg-gray-50/30">
+                <p id="detailAuthor" class="text-xs font-bold text-blue-600 uppercase tracking-widest mb-4"></p>
                 <div id="detailBody" class="text-gray-700 leading-relaxed whitespace-pre-wrap mb-10 text-lg"></div>
-                <div class="mt-10">
-                    <h3 class="font-bold text-gray-900 mb-6 flex items-center gap-2 border-b pb-2">
-                        <i class="fas fa-comments text-blue-500"></i> Ruang Diskusi
+                
+                <div class="mt-8 pt-8 border-t border-gray-200">
+                    <h3 class="font-bold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-comments mr-2 text-blue-500"></i> Tanggapan (<span id="commentCounter">0</span>)
                     </h3>
-                    <div id="commentsList" class="space-y-4 mb-6"></div>
-                    <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm mb-4">
-                        <div class="flex flex-col gap-3">
-                            <div class="flex gap-3">
-                                <input type="text" id="commenterName" placeholder="Namamu" class="w-1/3 px-4 py-2 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-500 outline-none bg-gray-50">
-                                <input type="text" id="commentText" placeholder="Ketik tanggapan..." class="w-2/3 px-4 py-2 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-500 outline-none bg-gray-50">
-                            </div>
-                            <button onclick="submitComment()" class="w-full bg-blue-600 text-white py-2.5 rounded-xl font-bold hover:bg-blue-700 transition">
-                                Kirim Komentar <i class="fas fa-paper-plane ml-2"></i>
-                            </button>
-                        </div>
+                    <div id="commentsContainer" class="space-y-4 mb-8"></div>
+                    
+                    <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+                        <input type="text" id="commenterName" placeholder="Namamu" class="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 outline-none text-sm focus:border-blue-300">
+                        <textarea id="commentText" placeholder="Tulis tanggapan..." class="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 outline-none text-sm focus:border-blue-300"></textarea>
+                        <button onclick="addComment()" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold shadow-lg shadow-blue-100 transition hover:bg-blue-700 active:scale-95">Kirim Tanggapan</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Admin Login Modal -->
+    <!-- Modal: Login -->
     <div id="loginModal" class="hidden fixed inset-0 z-[120] flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="toggleLoginModal()"></div>
-        <div class="relative bg-white w-full max-w-md p-8 rounded-3xl shadow-2xl">
-            <h2 class="text-2xl font-bold text-center mb-6">Akses Admin</h2>
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="toggleLoginModal()"></div>
+        <div class="relative bg-white w-full max-w-sm p-8 rounded-[2rem] shadow-2xl">
+            <h2 class="text-2xl font-bold text-center mb-6">Admin Login</h2>
             <div class="space-y-4">
-                <input type="text" id="adminUser" placeholder="Username" class="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none">
-                <input type="password" id="adminPass" placeholder="Password" class="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none">
-                <button onclick="handleLogin()" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700">Login</button>
+                <input type="text" id="adminUser" placeholder="Username" class="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-blue-500 transition-colors">
+                <div class="relative">
+                    <!-- Spasi diizinkan dengan menghapus pembatasan input standar -->
+                    <input type="password" id="adminPass" placeholder="Password" class="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-blue-500 transition-colors">
+                    <button type="button" onclick="togglePasswordVisibility()" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-blue-600 transition">
+                        <i id="eyeIcon" class="fas fa-eye"></i>
+                    </button>
+                </div>
+                <button onclick="handleLogin()" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold shadow-lg active:scale-95 transition">Login</button>
+                <p class="text-[10px] text-center text-gray-400 uppercase tracking-widest font-bold">Akses Terbatas Petugas</p>
             </div>
         </div>
     </div>
 
-    <!-- Post Modal -->
+    <!-- Modal: Post -->
     <div id="postModal" class="hidden fixed inset-0 z-[120] flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="togglePostModal()"></div>
-        <div class="relative bg-white w-full max-w-lg p-8 rounded-3xl shadow-2xl">
-            <h2 id="modalTitle" class="text-2xl font-bold mb-4 text-gray-800">Buat Konten</h2>
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="togglePostModal()"></div>
+        <div class="relative bg-white w-full max-w-lg p-8 rounded-[2.5rem] shadow-2xl">
+            <h2 id="modalPostTitle" class="text-2xl font-bold mb-6 text-gray-900">Kirim Konten</h2>
             <form id="postForm" class="space-y-4">
                 <input type="hidden" id="postType">
                 <div class="space-y-1">
-                    <label class="text-xs font-bold text-gray-400 ml-1">IDENTITAS</label>
-                    <input type="text" id="author" placeholder="Nama & Kelas" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 outline-none">
+                    <label class="text-[10px] font-bold text-gray-400 ml-2 uppercase">Identitas</label>
+                    <input type="text" id="author" placeholder="Nama & Kelas (Contoh: Nevada - XI IPA 1)" required class="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-blue-300">
                 </div>
                 <div class="space-y-1">
-                    <label class="text-xs font-bold text-gray-400 ml-1">JUDUL KONTEN</label>
-                    <input type="text" id="title" placeholder="Judul" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 outline-none">
+                    <label class="text-[10px] font-bold text-gray-400 ml-2 uppercase">Judul Karya/Topik</label>
+                    <input type="text" id="title" placeholder="Apa yang ingin kamu bahas?" required class="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-blue-300">
                 </div>
                 <div class="space-y-1">
-                    <label class="text-xs font-bold text-gray-400 ml-1">ISI PESAN</label>
-                    <textarea id="content" rows="4" placeholder="Tuliskan di sini..." required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 outline-none"></textarea>
+                    <label class="text-[10px] font-bold text-gray-400 ml-2 uppercase">Isi Pesan</label>
+                    <textarea id="content" rows="4" placeholder="Tulis detailnya di sini..." required class="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-blue-300"></textarea>
                 </div>
-                <button type="submit" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-blue-700 transition">Kirim untuk Moderasi</button>
+                <button type="submit" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold shadow-lg transition hover:bg-blue-700 active:scale-95">Kirim ke Moderasi</button>
             </form>
         </div>
     </div>
 
     <script>
-        let isAdmin = false;
-        let currentPostRef = null;
+        let currentActivePost = null;
+        let isAdminLoggedIn = false;
 
-        function showSection(sectionId) {
-            document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
-            document.getElementById(sectionId).classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        function showSection(id) {
+            document.querySelectorAll('main > section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
         }
 
         function toggleLoginModal() { 
             const modal = document.getElementById('loginModal');
             modal.classList.toggle('hidden');
-            if(!modal.classList.contains('hidden')) {
-                resetAdminForm();
+            if(modal.classList.contains('hidden')) {
+                document.getElementById('adminUser').value = '';
+                document.getElementById('adminPass').value = '';
+                const passInput = document.getElementById('adminPass');
+                passInput.type = 'password';
+                document.getElementById('eyeIcon').className = 'fas fa-eye';
             }
         }
 
+        function togglePasswordVisibility() {
+            const passInput = document.getElementById('adminPass');
+            const eyeIcon = document.getElementById('eyeIcon');
+            if (passInput.type === 'password') {
+                passInput.type = 'text';
+                eyeIcon.className = 'fas fa-eye-slash';
+            } else {
+                passInput.type = 'password';
+                eyeIcon.className = 'fas fa-eye';
+            }
+        }
+        
         function togglePostModal(type) {
             const modal = document.getElementById('postModal');
             modal.classList.toggle('hidden');
             if(type) {
                 document.getElementById('postType').value = type;
-                let title = 'Buat Konten';
-                if(type === 'majalah') title = 'Kirim Artikel E-Majalah';
-                if(type === 'forum') title = 'Buat Diskusi Forum';
-                if(type === 'info') title = 'Bagikan Info Terkini';
-                document.getElementById('modalTitle').innerText = title;
+                document.getElementById('modalPostTitle').innerText = 'Kirim Konten ke ' + type.toUpperCase();
             }
         }
 
         function handleLogin() {
-            const user = document.getElementById('adminUser').value;
-            const pass = document.getElementById('adminPass').value;
-            if (user === 'admin' && pass === 'admin') {
-                isAdmin = true;
+            const uField = document.getElementById('adminUser');
+            const pField = document.getElementById('adminPass');
+            
+            // Perbaikan: Username dicek trim, sandi dibiarkan aslinya (spasi dihitung)
+            if(uField.value.trim() === 'admin' && pField.value === 'admin password') { 
+                isAdminLoggedIn = true;
                 document.body.classList.add('admin-mode');
                 document.getElementById('loginBtn').classList.add('hidden');
                 document.getElementById('logoutBtn').classList.remove('hidden');
-                toggleLoginModal();
-                showSection('adminDashboard');
-            } else { 
-                alert('Gagal! Admin credentials salah.');
-                resetAdminForm(); 
+                uField.value = '';
+                pField.value = '';
+                document.getElementById('loginModal').classList.add('hidden');
+                
+                // Refresh views to show admin tools
+                refreshAllLists();
+                if(currentActivePost) renderComments();
+            } else {
+                alert('Akses ditolak! Password salah (ingat: spasi itu karakter juga).');
             }
         }
 
         function logout() {
-            isAdmin = false;
+            isAdminLoggedIn = false;
             document.body.classList.remove('admin-mode');
             document.getElementById('loginBtn').classList.remove('hidden');
             document.getElementById('logoutBtn').classList.add('hidden');
-            resetAdminForm();
-            showSection('home');
-        }
-
-        function resetAdminForm() {
-            document.getElementById('adminUser').value = '';
-            document.getElementById('adminPass').value = '';
-        }
-
-        function readDetail(btn) {
-            const card = btn.closest('.post-item');
-            currentPostRef = card;
-            document.getElementById('detailTitle').innerText = card.querySelector('.post-title').innerText;
-            document.getElementById('detailAuthor').innerText = card.querySelector('.post-author').innerText;
-            document.getElementById('detailBody').innerText = card.querySelector('.post-body').innerText;
             
-            // Atur Label Kategori
-            let cat = 'KONTEN';
-            if(card.closest('#majalahList')) cat = 'E-MAJALAH';
-            if(card.closest('#forumList')) cat = 'FORUM DISKUSI';
-            if(card.closest('#infoList')) cat = 'INFO TERKINI';
-            document.getElementById('detailCategory').innerText = cat;
-
-            renderComments();
-            document.getElementById('detailModal').classList.remove('hidden');
+            // Perbaikan: Refresh views buat ngilangin logo delete
+            refreshAllLists();
+            if(currentActivePost) renderComments();
+            
+            showSection('home');
+            alert('Logout berhasil. Status admin dicabut.');
         }
 
-        function renderComments() {
-            if(!currentPostRef) return;
-            const comments = JSON.parse(currentPostRef.getAttribute('data-comments') || "[]");
-            const list = document.getElementById('commentsList');
-            if(comments.length === 0) {
-                list.innerHTML = `<p class="text-sm text-gray-400 italic text-center py-6">Belum ada tanggapan.</p>`;
-                return;
-            }
-            list.innerHTML = comments.map((c, index) => `
-                <div class="comment-card bg-white p-4 rounded-2xl border border-gray-100 flex gap-3 shadow-sm relative group transition-all">
-                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-xs">
-                        ${c.name.substring(0,2).toUpperCase()}
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex justify-between items-start">
-                            <p class="text-sm font-bold text-gray-800">${c.name}</p>
-                            ${isAdmin ? `<button onclick="deleteComment(event, ${index})" class="delete-btn text-red-400 hover:text-red-600 transition-opacity md:opacity-0 group-hover:opacity-100 p-1 z-[130]"><i class="fas fa-trash-alt text-xs"></i></button>` : ''}
-                        </div>
-                        <p class="text-sm text-gray-600 mt-1 leading-relaxed">${c.text}</p>
-                    </div>
-                </div>
-            `).join('');
+        // Helper buat render ulang postingan pas ganti mode admin
+        function refreshAllLists() {
+            ['majalahList', 'forumList', 'infoList'].forEach(listId => {
+                const list = document.getElementById(listId);
+                const posts = list.querySelectorAll('.post-item');
+                posts.forEach(post => {
+                    const deleteBtn = post.querySelector('.admin-only');
+                    if (isAdminLoggedIn) {
+                        deleteBtn.style.display = 'flex';
+                    } else {
+                        deleteBtn.style.display = 'none';
+                    }
+                });
+            });
         }
 
-        function submitComment() {
-            const name = document.getElementById('commenterName').value;
-            const text = document.getElementById('commentText').value;
-            if(!name || !text) return;
-            const comments = JSON.parse(currentPostRef.getAttribute('data-comments') || "[]");
-            comments.push({ name, text });
-            currentPostRef.setAttribute('data-comments', JSON.stringify(comments));
-            renderComments();
-            document.getElementById('commenterName').value = '';
-            document.getElementById('commentText').value = '';
-        }
-
-        function deleteComment(e, index) {
-            e.stopPropagation();
-            if(!confirm('Hapus komentar ini?')) return;
-            let comments = JSON.parse(currentPostRef.getAttribute('data-comments') || "[]");
-            comments.splice(index, 1);
-            currentPostRef.setAttribute('data-comments', JSON.stringify(comments));
-            renderComments();
-        }
-
-        function closeDetail() { document.getElementById('detailModal').classList.add('hidden'); currentPostRef = null; }
-
+        // Posting Logic
         document.getElementById('postForm').onsubmit = function(e) {
             e.preventDefault();
             const queue = document.getElementById('approvalQueue');
+            const data = {
+                id: Date.now(),
+                type: document.getElementById('postType').value,
+                author: document.getElementById('author').value,
+                title: document.getElementById('title').value,
+                content: document.getElementById('content').value,
+                comments: []
+            };
+
             const newReq = document.createElement('div');
-            newReq.className = "approval-card bg-white border border-gray-200 p-5 rounded-2xl flex items-center justify-between shadow-sm";
-            newReq.setAttribute('data-type', this.postType.value);
-            newReq.setAttribute('data-author', this.author.value);
-            newReq.setAttribute('data-title', this.title.value);
-            newReq.setAttribute('data-content', this.content.value);
-            
-            // Icon beda-beda sesuai tipe
-            let iconClass = "fa-clock";
-            let colorClass = "text-orange-600 bg-orange-100";
-            if(this.postType.value === 'info') { iconClass = "fa-bullhorn"; colorClass = "text-red-600 bg-red-100"; }
-            if(this.postType.value === 'forum') { iconClass = "fa-comments"; colorClass = "text-green-600 bg-green-100"; }
+            newReq.className = "bg-white border border-gray-200 p-6 rounded-2xl flex items-center justify-between shadow-sm approval-card animate-in slide-in-from-right-4 duration-300";
+            newReq.dataset.post = JSON.stringify(data);
             
             newReq.innerHTML = `
-                <div class="flex gap-4 items-center">
-                    <div class="w-10 h-10 ${colorClass} rounded-full flex items-center justify-center"><i class="fas ${iconClass} text-sm"></i></div>
-                    <div>
-                        <span class="text-[10px] font-black uppercase tracking-widest ${colorClass.split(' ')[0]}">${this.postType.value}</span>
-                        <h4 class="font-bold text-lg text-gray-900">${this.title.value}</h4>
-                        <p class="text-xs text-gray-500">Dari: ${this.author.value}</p>
-                    </div>
+                <div>
+                    <span class="text-[10px] font-black uppercase px-2 py-1 bg-blue-50 text-blue-600 rounded-md">${data.type}</span>
+                    <h4 class="font-bold text-lg mt-1 text-gray-900">${data.title}</h4>
+                    <p class="text-xs text-gray-400 font-medium">Pengirim: ${data.author}</p>
                 </div>
                 <div class="flex gap-2">
-                    <button onclick="approvePost(this)" class="bg-green-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-green-700 transition">Terbitkan</button>
-                    <button onclick="this.closest('.approval-card').remove()" class="bg-red-50 text-red-600 px-4 py-2 rounded-xl text-xs font-bold hover:bg-red-100 transition">Tolak</button>
+                    <button onclick="approvePost(this)" class="bg-blue-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-blue-700 transition">SETUJU</button>
+                    <button onclick="this.closest('.approval-card').remove()" class="bg-gray-50 text-gray-400 px-4 py-2 rounded-xl text-xs font-bold hover:bg-red-50 hover:text-red-600 transition">TOLAK</button>
                 </div>
             `;
             queue.appendChild(newReq);
-            alert('Konten berhasil dikirim! Menunggu persetujuan Admin.');
             togglePostModal();
             this.reset();
         };
 
         function approvePost(btn) {
             const card = btn.closest('.approval-card');
-            const type = card.getAttribute('data-type');
-            const author = card.getAttribute('data-author');
-            const title = card.getAttribute('data-title');
-            const content = card.getAttribute('data-content');
+            const data = JSON.parse(card.dataset.post);
+            const colorClass = data.type === 'majalah' ? 'blue' : (data.type === 'forum' ? 'indigo' : 'orange');
             
-            let postHTML = '';
+            const postElement = document.createElement('div');
+            postElement.className = `bg-white p-6 rounded-3xl border border-gray-100 shadow-sm relative post-item animate-in zoom-in-95 duration-500`;
+            postElement.dataset.postData = JSON.stringify(data);
+            
+            // Dinamis inline style buat handle logo delete tanpa reload page
+            const deleteStyle = isAdminLoggedIn ? 'flex' : 'none';
 
-            if (type === 'info') {
-                postHTML = `
-                    <div class="bg-orange-50 border border-orange-100 p-6 rounded-2xl post-item" data-comments='[]'>
-                        <div class="flex justify-between items-start mb-3">
-                            <div class="flex items-center gap-2 text-orange-600">
-                                <i class="fas fa-bullhorn"></i>
-                                <span class="text-xs font-bold uppercase tracking-widest">INFO SISWA</span>
-                            </div>
-                            <button onclick="this.closest('.post-item').remove()" class="admin-only text-orange-300 hover:text-red-500"><i class="fas fa-trash-alt text-xs"></i></button>
-                        </div>
-                        <h3 class="text-lg font-bold mb-2 post-title">${title}</h3>
-                        <p class="text-sm text-gray-600 post-body line-clamp-3">${content}</p>
-                        <div class="mt-4 pt-4 border-t border-orange-100 flex justify-between items-center">
-                            <span class="text-[10px] text-orange-400 font-bold post-author uppercase">${author}</span>
-                            <button onclick="readDetail(this)" class="text-orange-600 font-bold text-xs">Detail</button>
-                        </div>
+            postElement.innerHTML = `
+                <button onclick="handleDeletePost(this)" class="admin-only absolute top-4 right-4 w-8 h-8 rounded-full bg-red-50 text-red-400 hover:text-red-600 hover:bg-red-100 transition items-center justify-center" style="display: ${deleteStyle}"><i class="fas fa-trash-alt text-sm"></i></button>
+                <span class="text-[9px] font-black uppercase text-${colorClass}-500 tracking-widest">${data.type}</span>
+                <h3 class="text-xl font-bold mt-1 post-title text-gray-900">${data.title}</h3>
+                <p class="text-gray-500 mt-2 line-clamp-3 post-body text-sm leading-relaxed">${data.content}</p>
+                <div class="mt-4 flex justify-between items-center border-t border-gray-50 pt-4">
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase">${data.author}</span>
+                        <span class="text-[10px] font-bold text-blue-500 bg-blue-50 px-2 py-0.5 rounded-full comment-badge">
+                            <i class="fas fa-comment-dots mr-1"></i><span class="badge-count">0</span>
+                        </span>
                     </div>
-                `;
-            } else if (type === 'forum') {
-                postHTML = `
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex gap-4 post-item" data-comments='[]'>
-                        <div class="flex-shrink-0"><div class="w-12 h-12 bg-indigo-600 text-white rounded-2xl flex items-center justify-center font-bold">${author.substring(0,2).toUpperCase()}</div></div>
-                        <div class="flex-grow">
-                            <div class="flex justify-between">
-                                <h4 class="font-bold text-lg post-title">${title}</h4>
-                                <button onclick="this.closest('.post-item').remove()" class="admin-only text-red-300 hover:text-red-600"><i class="fas fa-trash-alt"></i></button>
-                            </div>
-                            <p class="text-gray-600 mt-2 line-clamp-3 post-body">${content}</p>
-                            <div class="mt-4 flex justify-between items-center border-t border-gray-50 pt-4">
-                                <div class="text-xs text-gray-400 font-medium post-author">${author}</div>
-                                <button onclick="readDetail(this)" class="bg-indigo-50 text-indigo-700 font-bold px-4 py-1.5 rounded-xl text-xs">Diskusi</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            } else {
-                postHTML = `
-                    <article class="bg-white overflow-hidden rounded-3xl shadow-sm border border-gray-100 post-item" data-comments='[]'>
-                        <div class="h-40 bg-blue-600 flex items-center justify-center text-white/20"><i class="fas fa-newspaper text-5xl"></i></div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-center mb-3">
-                                <span class="text-[10px] font-bold uppercase text-blue-600 bg-blue-50 px-2 py-1 rounded">Artikel</span>
-                                <button onclick="this.closest('article').remove()" class="admin-only text-red-300 hover:text-red-500"><i class="fas fa-trash-alt text-xs"></i></button>
-                            </div>
-                            <h3 class="text-xl font-bold post-title">${title}</h3>
-                            <p class="text-gray-600 mt-2 line-clamp-3 post-body">${content}</p>
-                            <div class="mt-6 flex items-center justify-between border-t border-gray-50 pt-4">
-                                <span class="text-xs text-gray-400 italic post-author">${author}</span>
-                                <button onclick="readDetail(this)" class="bg-blue-600 text-white px-5 py-2 rounded-xl text-xs font-bold">Baca Selengkapnya</button>
-                            </div>
-                        </div>
-                    </article>
-                `;
+                    <button onclick="openDetail(this)" class="text-${colorClass}-600 font-bold text-xs hover:bg-${colorClass}-50 px-3 py-1.5 rounded-lg transition">Baca & Tanggapi</button>
+                </div>
+            `;
+            
+            document.getElementById(data.type + 'List').insertAdjacentHTML('afterbegin', postElement.outerHTML);
+            card.remove();
+        }
+
+        function handleDeletePost(btn) {
+            if (!isAdminLoggedIn) return;
+            if(confirm('Hapus postingan ini secara permanen?')) {
+                btn.closest('.post-item').remove();
             }
+        }
 
-            document.getElementById(type + 'List').insertAdjacentHTML('afterbegin', postHTML);
-            card.style.opacity = '0';
-            card.style.transform = 'scale(0.9)';
-            setTimeout(() => card.remove(), 300);
+        function openDetail(btn) {
+            const postItem = btn.closest('.post-item');
+            currentActivePost = postItem;
+            const data = JSON.parse(postItem.dataset.postData);
+
+            document.getElementById('detailTitle').innerText = data.title;
+            document.getElementById('detailAuthor').innerText = `DIPOSTING OLEH: ${data.author}`;
+            document.getElementById('detailBody').innerText = data.content;
+            
+            renderComments();
+            document.getElementById('detailModal').classList.remove('hidden');
+        }
+
+        function closeDetail() {
+            document.getElementById('detailModal').classList.add('hidden');
+            currentActivePost = null;
+        }
+
+        function renderComments() {
+            if(!currentActivePost) return;
+            const data = JSON.parse(currentActivePost.dataset.postData);
+            const container = document.getElementById('commentsContainer');
+            const counter = document.getElementById('commentCounter');
+            const badgeCount = currentActivePost.querySelector('.badge-count');
+
+            counter.innerText = data.comments.length;
+            badgeCount.innerText = data.comments.length;
+
+            if (data.comments.length === 0) {
+                container.innerHTML = `<div class="text-center py-8 bg-gray-50 rounded-2xl border border-dashed border-gray-200"><p class="text-gray-400 text-xs font-medium uppercase tracking-tighter">Belum ada tanggapan</p></div>`;
+            } else {
+                container.innerHTML = data.comments.map((c, index) => `
+                    <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex justify-between items-start group">
+                        <div class="flex-grow">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="font-bold text-[11px] text-gray-900 uppercase">${c.name}</span>
+                                <span class="text-[9px] text-gray-400 font-bold">${c.time}</span>
+                            </div>
+                            <p class="text-gray-600 text-sm leading-relaxed">${c.text}</p>
+                        </div>
+                        ${isAdminLoggedIn ? `
+                            <button onclick="handleDeleteComment(${index})" class="text-red-300 hover:text-red-500 p-1 transition opacity-0 group-hover:opacity-100">
+                                <i class="fas fa-trash-alt text-xs"></i>
+                            </button>
+                        ` : ''}
+                    </div>
+                `).join('');
+            }
+        }
+
+        function addComment() {
+            const nameInput = document.getElementById('commenterName');
+            const textInput = document.getElementById('commentText');
+            if (!nameInput.value.trim() || !textInput.value.trim()) return;
+
+            const data = JSON.parse(currentActivePost.dataset.postData);
+            data.comments.push({
+                name: nameInput.value,
+                text: textInput.value,
+                time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+            });
+
+            currentActivePost.dataset.postData = JSON.stringify(data);
+            textInput.value = '';
+            renderComments();
+        }
+
+        function handleDeleteComment(index) {
+            if (!isAdminLoggedIn) return;
+            if(!confirm('Hapus tanggapan ini?')) return;
+            
+            const data = JSON.parse(currentActivePost.dataset.postData);
+            data.comments.splice(index, 1);
+            
+            currentActivePost.dataset.postData = JSON.stringify(data);
+            renderComments();
         }
     </script>
 </body>
