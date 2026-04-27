@@ -36,6 +36,7 @@
                     <a href="#" onclick="showSection('home')" class="nav-link text-gray-600 hover:text-blue-600 font-medium">Beranda</a>
                     <a href="#" onclick="showSection('majalah')" class="nav-link text-gray-600 hover:text-blue-600 font-medium">E-Majalah</a>
                     <a href="#" onclick="showSection('forum')" class="nav-link text-gray-600 hover:text-blue-600 font-medium">Forum</a>
+                    <a href="#" onclick="showSection('info')" class="nav-link text-gray-600 hover:text-blue-600 font-medium">Info Terkini</a>
                 </div>
 
                 <div class="flex items-center gap-4">
@@ -71,7 +72,7 @@
                     <h3 class="text-xl font-bold mb-2">Forum Diskusi</h3>
                     <p class="text-gray-500">Kritik dan saran sehat untuk sekolah.</p>
                 </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <div onclick="showSection('info')" class="cursor-pointer bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
                     <i class="fas fa-bullhorn text-3xl text-orange-500 mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Info Terkini</h3>
                     <p class="text-gray-500">Jadwal event dan pengumuman penting.</p>
@@ -87,23 +88,7 @@
                     + Kirim Artikel
                 </button>
             </div>
-            <div id="majalahList" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Post Dummy -->
-                <article class="bg-white overflow-hidden rounded-2xl shadow-sm border border-gray-100 post-item" data-comments='[]'>
-                    <div class="h-48 bg-gray-200 flex items-center justify-center text-gray-400">
-                        <i class="fas fa-image text-4xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-xs font-bold uppercase text-blue-600 bg-blue-50 px-2 py-1 rounded">Teknologi</span>
-                        <h3 class="text-xl font-bold mt-2 post-title">Dampak AI bagi Masa Depan Pelajar</h3>
-                        <p class="text-gray-600 mt-2 line-clamp-3 post-body">Bagaimana kita sebagai siswa harus menyikapi perkembangan AI yang sangat cepat...</p>
-                        <div class="mt-4 flex items-center justify-between">
-                            <span class="text-sm text-gray-400 font-medium post-author">Budi Santoso</span>
-                            <button onclick="readDetail(this)" class="text-blue-600 font-bold text-sm hover:underline">Baca & Komentar</button>
-                        </div>
-                    </div>
-                </article>
-            </div>
+            <div id="majalahList" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
         </section>
 
         <!-- Section: Forum -->
@@ -117,6 +102,31 @@
             <div id="forumList" class="space-y-4"></div>
         </section>
 
+        <!-- Section: Info Terkini -->
+        <section id="info" class="hidden space-y-6">
+            <div class="flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-gray-800">Info Terkini & Event</h2>
+                <button onclick="togglePostModal('info')" class="student-only bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-orange-600 transition">
+                    + Bagikan Info
+                </button>
+            </div>
+            <div id="infoList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Info Default -->
+                <div class="bg-orange-50 border border-orange-100 p-6 rounded-2xl post-item" data-comments='[]'>
+                    <div class="flex items-center gap-2 text-orange-600 mb-3">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span class="text-xs font-bold uppercase tracking-widest">Pengumuman Resmi</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 post-title">Ujian Tengah Semester Ganjil</h3>
+                    <p class="text-sm text-gray-600 post-body">Pelaksanaan UTS akan dimulai pada tanggal 15 Oktober 2023. Siapkan diri kalian!</p>
+                    <div class="mt-4 pt-4 border-t border-orange-100 flex justify-between items-center">
+                        <span class="text-[10px] text-orange-400 font-bold post-author">ADMIN SEKOLAH</span>
+                        <button onclick="readDetail(this)" class="text-orange-600 font-bold text-xs">Detail</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Section: Admin Approval -->
         <section id="adminDashboard" class="admin-only space-y-6 mt-10">
             <div class="bg-gray-900 text-white p-6 rounded-2xl shadow-lg">
@@ -126,9 +136,7 @@
                 </h2>
                 <p class="text-gray-400 text-sm mt-1">Daftar konten yang menunggu persetujuan Anda.</p>
             </div>
-            <div id="approvalQueue" class="space-y-4">
-                <!-- Antrian akan muncul di sini -->
-            </div>
+            <div id="approvalQueue" class="space-y-4"></div>
         </section>
     </main>
 
@@ -146,20 +154,13 @@
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
-
             <div class="p-6 overflow-y-auto flex-grow bg-gray-50/30">
-                <div id="detailBody" class="text-gray-700 leading-relaxed whitespace-pre-wrap mb-10 text-lg">
-                    Isi lengkap...
-                </div>
-
+                <div id="detailBody" class="text-gray-700 leading-relaxed whitespace-pre-wrap mb-10 text-lg"></div>
                 <div class="mt-10">
                     <h3 class="font-bold text-gray-900 mb-6 flex items-center gap-2 border-b pb-2">
-                        <i class="fas fa-comments text-blue-500"></i>
-                        Ruang Diskusi
+                        <i class="fas fa-comments text-blue-500"></i> Ruang Diskusi
                     </h3>
-                    
                     <div id="commentsList" class="space-y-4 mb-6"></div>
-
                     <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm mb-4">
                         <div class="flex flex-col gap-3">
                             <div class="flex gap-3">
@@ -176,7 +177,7 @@
         </div>
     </div>
 
-    <!-- Modals -->
+    <!-- Admin Login Modal -->
     <div id="loginModal" class="hidden fixed inset-0 z-[120] flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="toggleLoginModal()"></div>
         <div class="relative bg-white w-full max-w-md p-8 rounded-3xl shadow-2xl">
@@ -189,16 +190,26 @@
         </div>
     </div>
 
+    <!-- Post Modal -->
     <div id="postModal" class="hidden fixed inset-0 z-[120] flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="togglePostModal()"></div>
         <div class="relative bg-white w-full max-w-lg p-8 rounded-3xl shadow-2xl">
-            <h2 id="modalTitle" class="text-2xl font-bold mb-4">Buat Konten</h2>
+            <h2 id="modalTitle" class="text-2xl font-bold mb-4 text-gray-800">Buat Konten</h2>
             <form id="postForm" class="space-y-4">
                 <input type="hidden" id="postType">
-                <input type="text" id="author" placeholder="Nama & Kelas" required class="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none">
-                <input type="text" id="title" placeholder="Judul" required class="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none">
-                <textarea id="content" rows="4" placeholder="Isi aspirasi..." required class="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none"></textarea>
-                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold">Kirim untuk Moderasi</button>
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-gray-400 ml-1">IDENTITAS</label>
+                    <input type="text" id="author" placeholder="Nama & Kelas" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 outline-none">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-gray-400 ml-1">JUDUL KONTEN</label>
+                    <input type="text" id="title" placeholder="Judul" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 outline-none">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-gray-400 ml-1">ISI PESAN</label>
+                    <textarea id="content" rows="4" placeholder="Tuliskan di sini..." required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 outline-none"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-blue-700 transition">Kirim untuk Moderasi</button>
             </form>
         </div>
     </div>
@@ -210,27 +221,44 @@
         function showSection(sectionId) {
             document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
             document.getElementById(sectionId).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function toggleLoginModal() { document.getElementById('loginModal').classList.toggle('hidden'); }
+        function toggleLoginModal() { 
+            const modal = document.getElementById('loginModal');
+            modal.classList.toggle('hidden');
+            if(!modal.classList.contains('hidden')) {
+                resetAdminForm();
+            }
+        }
+
         function togglePostModal(type) {
             const modal = document.getElementById('postModal');
             modal.classList.toggle('hidden');
             if(type) {
                 document.getElementById('postType').value = type;
-                document.getElementById('modalTitle').innerText = type === 'majalah' ? 'Kirim Artikel' : 'Kirim Forum';
+                let title = 'Buat Konten';
+                if(type === 'majalah') title = 'Kirim Artikel E-Majalah';
+                if(type === 'forum') title = 'Buat Diskusi Forum';
+                if(type === 'info') title = 'Bagikan Info Terkini';
+                document.getElementById('modalTitle').innerText = title;
             }
         }
 
         function handleLogin() {
-            if (document.getElementById('adminUser').value === 'admin' && document.getElementById('adminPass').value === 'admin') {
+            const user = document.getElementById('adminUser').value;
+            const pass = document.getElementById('adminPass').value;
+            if (user === 'admin' && pass === 'admin') {
                 isAdmin = true;
                 document.body.classList.add('admin-mode');
                 document.getElementById('loginBtn').classList.add('hidden');
                 document.getElementById('logoutBtn').classList.remove('hidden');
                 toggleLoginModal();
                 showSection('adminDashboard');
-            } else { alert('Gagal! Admin credentials salah.'); }
+            } else { 
+                alert('Gagal! Admin credentials salah.');
+                resetAdminForm(); 
+            }
         }
 
         function logout() {
@@ -238,18 +266,29 @@
             document.body.classList.remove('admin-mode');
             document.getElementById('loginBtn').classList.remove('hidden');
             document.getElementById('logoutBtn').classList.add('hidden');
+            resetAdminForm();
             showSection('home');
+        }
+
+        function resetAdminForm() {
+            document.getElementById('adminUser').value = '';
+            document.getElementById('adminPass').value = '';
         }
 
         function readDetail(btn) {
             const card = btn.closest('.post-item');
             currentPostRef = card;
-            
             document.getElementById('detailTitle').innerText = card.querySelector('.post-title').innerText;
             document.getElementById('detailAuthor').innerText = card.querySelector('.post-author').innerText;
             document.getElementById('detailBody').innerText = card.querySelector('.post-body').innerText;
-            document.getElementById('detailCategory').innerText = card.tagName === 'ARTICLE' ? 'E-MAJALAH' : 'FORUM DISKUSI';
             
+            // Atur Label Kategori
+            let cat = 'KONTEN';
+            if(card.closest('#majalahList')) cat = 'E-MAJALAH';
+            if(card.closest('#forumList')) cat = 'FORUM DISKUSI';
+            if(card.closest('#infoList')) cat = 'INFO TERKINI';
+            document.getElementById('detailCategory').innerText = cat;
+
             renderComments();
             document.getElementById('detailModal').classList.remove('hidden');
         }
@@ -258,12 +297,10 @@
             if(!currentPostRef) return;
             const comments = JSON.parse(currentPostRef.getAttribute('data-comments') || "[]");
             const list = document.getElementById('commentsList');
-            
             if(comments.length === 0) {
                 list.innerHTML = `<p class="text-sm text-gray-400 italic text-center py-6">Belum ada tanggapan.</p>`;
                 return;
             }
-
             list.innerHTML = comments.map((c, index) => `
                 <div class="comment-card bg-white p-4 rounded-2xl border border-gray-100 flex gap-3 shadow-sm relative group transition-all">
                     <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-xs">
@@ -272,11 +309,7 @@
                     <div class="flex-grow">
                         <div class="flex justify-between items-start">
                             <p class="text-sm font-bold text-gray-800">${c.name}</p>
-                            ${isAdmin ? `
-                                <button onclick="deleteComment(event, ${index})" class="delete-btn text-red-400 hover:text-red-600 transition-opacity md:opacity-0 group-hover:opacity-100 p-1 z-[130]">
-                                    <i class="fas fa-trash-alt text-xs"></i>
-                                </button>
-                            ` : ''}
+                            ${isAdmin ? `<button onclick="deleteComment(event, ${index})" class="delete-btn text-red-400 hover:text-red-600 transition-opacity md:opacity-0 group-hover:opacity-100 p-1 z-[130]"><i class="fas fa-trash-alt text-xs"></i></button>` : ''}
                         </div>
                         <p class="text-sm text-gray-600 mt-1 leading-relaxed">${c.text}</p>
                     </div>
@@ -288,11 +321,9 @@
             const name = document.getElementById('commenterName').value;
             const text = document.getElementById('commentText').value;
             if(!name || !text) return;
-
             const comments = JSON.parse(currentPostRef.getAttribute('data-comments') || "[]");
             comments.push({ name, text });
             currentPostRef.setAttribute('data-comments', JSON.stringify(comments));
-
             renderComments();
             document.getElementById('commenterName').value = '';
             document.getElementById('commentText').value = '';
@@ -307,18 +338,11 @@
             renderComments();
         }
 
-        function closeDetail() { 
-            document.getElementById('detailModal').classList.add('hidden'); 
-            currentPostRef = null; 
-        }
-
-        // --- HANDLING POSTS ---
+        function closeDetail() { document.getElementById('detailModal').classList.add('hidden'); currentPostRef = null; }
 
         document.getElementById('postForm').onsubmit = function(e) {
             e.preventDefault();
             const queue = document.getElementById('approvalQueue');
-            
-            // Simpan data di data-attributes biar aman
             const newReq = document.createElement('div');
             newReq.className = "approval-card bg-white border border-gray-200 p-5 rounded-2xl flex items-center justify-between shadow-sm";
             newReq.setAttribute('data-type', this.postType.value);
@@ -326,13 +350,17 @@
             newReq.setAttribute('data-title', this.title.value);
             newReq.setAttribute('data-content', this.content.value);
             
+            // Icon beda-beda sesuai tipe
+            let iconClass = "fa-clock";
+            let colorClass = "text-orange-600 bg-orange-100";
+            if(this.postType.value === 'info') { iconClass = "fa-bullhorn"; colorClass = "text-red-600 bg-red-100"; }
+            if(this.postType.value === 'forum') { iconClass = "fa-comments"; colorClass = "text-green-600 bg-green-100"; }
+            
             newReq.innerHTML = `
                 <div class="flex gap-4 items-center">
-                    <div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center">
-                        <i class="fas fa-clock text-sm"></i>
-                    </div>
+                    <div class="w-10 h-10 ${colorClass} rounded-full flex items-center justify-center"><i class="fas ${iconClass} text-sm"></i></div>
                     <div>
-                        <span class="text-[10px] font-black text-orange-600 uppercase tracking-widest">${this.postType.value}</span>
+                        <span class="text-[10px] font-black uppercase tracking-widest ${colorClass.split(' ')[0]}">${this.postType.value}</span>
                         <h4 class="font-bold text-lg text-gray-900">${this.title.value}</h4>
                         <p class="text-xs text-gray-500">Dari: ${this.author.value}</p>
                     </div>
@@ -342,61 +370,79 @@
                     <button onclick="this.closest('.approval-card').remove()" class="bg-red-50 text-red-600 px-4 py-2 rounded-xl text-xs font-bold hover:bg-red-100 transition">Tolak</button>
                 </div>
             `;
-            
             queue.appendChild(newReq);
-            alert('Aspirasi dikirim! Menunggu konfirmasi admin.');
+            alert('Konten berhasil dikirim! Menunggu persetujuan Admin.');
             togglePostModal();
             this.reset();
         };
 
-        // PERBAIKAN: Fungsi approvePost sekarang ngambil data dari atribut elemen
         function approvePost(btn) {
             const card = btn.closest('.approval-card');
             const type = card.getAttribute('data-type');
             const author = card.getAttribute('data-author');
             const title = card.getAttribute('data-title');
             const content = card.getAttribute('data-content');
+            
+            let postHTML = '';
 
-            const postHTML = type === 'forum' ? `
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex gap-4 post-item" data-comments='[]'>
-                    <div class="flex-shrink-0">
-                        <div class="w-12 h-12 bg-indigo-600 text-white rounded-2xl flex items-center justify-center font-bold">${author.substring(0,2).toUpperCase()}</div>
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex justify-between">
-                            <h4 class="font-bold text-lg post-title">${title}</h4>
-                            <button onclick="this.closest('.post-item').remove()" class="admin-only text-red-300 hover:text-red-600"><i class="fas fa-trash-alt"></i></button>
+            if (type === 'info') {
+                postHTML = `
+                    <div class="bg-orange-50 border border-orange-100 p-6 rounded-2xl post-item" data-comments='[]'>
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex items-center gap-2 text-orange-600">
+                                <i class="fas fa-bullhorn"></i>
+                                <span class="text-xs font-bold uppercase tracking-widest">INFO SISWA</span>
+                            </div>
+                            <button onclick="this.closest('.post-item').remove()" class="admin-only text-orange-300 hover:text-red-500"><i class="fas fa-trash-alt text-xs"></i></button>
                         </div>
-                        <p class="text-gray-600 mt-2 line-clamp-3 post-body">${content}</p>
-                        <div class="mt-4 flex justify-between items-center border-t border-gray-50 pt-4">
-                            <div class="text-xs text-gray-400 font-medium post-author">${author}</div>
-                            <button onclick="readDetail(this)" class="bg-indigo-50 text-indigo-700 font-bold px-4 py-1.5 rounded-xl text-xs">Diskusi & Komentar</button>
-                        </div>
-                    </div>
-                </div>
-            ` : `
-                <article class="bg-white overflow-hidden rounded-3xl shadow-sm border border-gray-100 post-item" data-comments='[]'>
-                    <div class="h-40 bg-blue-600 flex items-center justify-center text-white/20"><i class="fas fa-newspaper text-5xl"></i></div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-[10px] font-bold uppercase text-blue-600 bg-blue-50 px-2 py-1 rounded">Artikel</span>
-                            <button onclick="this.closest('article').remove()" class="admin-only text-red-300 hover:text-red-500"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                        <h3 class="text-xl font-bold post-title">${title}</h3>
-                        <p class="text-gray-600 mt-2 line-clamp-3 post-body">${content}</p>
-                        <div class="mt-6 flex items-center justify-between border-t border-gray-50 pt-4">
-                            <span class="text-xs text-gray-400 italic post-author">${author}</span>
-                            <button onclick="readDetail(this)" class="bg-blue-600 text-white px-5 py-2 rounded-xl text-xs font-bold">Baca & Kritik</button>
+                        <h3 class="text-lg font-bold mb-2 post-title">${title}</h3>
+                        <p class="text-sm text-gray-600 post-body line-clamp-3">${content}</p>
+                        <div class="mt-4 pt-4 border-t border-orange-100 flex justify-between items-center">
+                            <span class="text-[10px] text-orange-400 font-bold post-author uppercase">${author}</span>
+                            <button onclick="readDetail(this)" class="text-orange-600 font-bold text-xs">Detail</button>
                         </div>
                     </div>
-                </article>
-            `;
+                `;
+            } else if (type === 'forum') {
+                postHTML = `
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex gap-4 post-item" data-comments='[]'>
+                        <div class="flex-shrink-0"><div class="w-12 h-12 bg-indigo-600 text-white rounded-2xl flex items-center justify-center font-bold">${author.substring(0,2).toUpperCase()}</div></div>
+                        <div class="flex-grow">
+                            <div class="flex justify-between">
+                                <h4 class="font-bold text-lg post-title">${title}</h4>
+                                <button onclick="this.closest('.post-item').remove()" class="admin-only text-red-300 hover:text-red-600"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                            <p class="text-gray-600 mt-2 line-clamp-3 post-body">${content}</p>
+                            <div class="mt-4 flex justify-between items-center border-t border-gray-50 pt-4">
+                                <div class="text-xs text-gray-400 font-medium post-author">${author}</div>
+                                <button onclick="readDetail(this)" class="bg-indigo-50 text-indigo-700 font-bold px-4 py-1.5 rounded-xl text-xs">Diskusi</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                postHTML = `
+                    <article class="bg-white overflow-hidden rounded-3xl shadow-sm border border-gray-100 post-item" data-comments='[]'>
+                        <div class="h-40 bg-blue-600 flex items-center justify-center text-white/20"><i class="fas fa-newspaper text-5xl"></i></div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-[10px] font-bold uppercase text-blue-600 bg-blue-50 px-2 py-1 rounded">Artikel</span>
+                                <button onclick="this.closest('article').remove()" class="admin-only text-red-300 hover:text-red-500"><i class="fas fa-trash-alt text-xs"></i></button>
+                            </div>
+                            <h3 class="text-xl font-bold post-title">${title}</h3>
+                            <p class="text-gray-600 mt-2 line-clamp-3 post-body">${content}</p>
+                            <div class="mt-6 flex items-center justify-between border-t border-gray-50 pt-4">
+                                <span class="text-xs text-gray-400 italic post-author">${author}</span>
+                                <button onclick="readDetail(this)" class="bg-blue-600 text-white px-5 py-2 rounded-xl text-xs font-bold">Baca Selengkapnya</button>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }
 
             document.getElementById(type + 'List').insertAdjacentHTML('afterbegin', postHTML);
-            
-            // Efek transisi pas hapus kartu antrian
             card.style.opacity = '0';
-            card.style.transform = 'translateX(20px)';
+            card.style.transform = 'scale(0.9)';
             setTimeout(() => card.remove(), 300);
         }
     </script>
